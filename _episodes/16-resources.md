@@ -81,9 +81,11 @@ scheduler. It may be useful to redirect this information to `less` to make it ea
 the left and right arrow keys to scroll through fields).
 
 ```
-[remote]$ sacct -j 1965 -l | less
+[remote]$ sacct -j 1965 -l | less -S
 ```
 {: .bash}
+
+* the -S flag turns off line folding, making it easier to associate column names with values
 
 Some interesting fields include the following:
 

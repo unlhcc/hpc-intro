@@ -75,8 +75,9 @@ start_time: 0
 # this is the scheduler to be used for the workshop
 # possible values: slurm (planned lsf & pbs)
 scheduler: "slurm"
-login_host: "cray-1"
-cluster_name: "cray-1"
+login_host: "clark.rnet.missouri.edu"
+hostname: "tc-m610-login-node623"
+cluster_name: "clark.rnet.missouri.edu"
 shared_fast_filesystem: "/fastfs"
 
 

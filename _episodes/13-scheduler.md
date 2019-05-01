@@ -285,7 +285,7 @@ tasks as a one-off with `srun`.
 ```
 {: .bash}
 ```
-gra752
+tc-m710-hpc0-node625
 ```
 {: .output}
 
@@ -317,7 +317,7 @@ Fortunately, SLURM makes it easy to start an interactive job with `srun`:
 
 > ## Note for administrators
 > 
-> The `--x11` option will not work unless the
+> The `--x11` option will not work unless the Slurm version is greater than or equal to 17.11 and the
 > [slurm-spank-x11](https://github.com/hautreux/slurm-spank-x11) plugin is installed. You should
 > also make sure `xeyes` is installed as an example X11 app (`xorg-x11-apps` package on CentOS). If
 > you do not have these installed, just have students use `srun --pty bash` instead.

@@ -24,7 +24,7 @@ keypoints:
 Throughout this material, we will assist Lola Curious and look over her shoulder while she is 
 starting to work at the Institute of Things as a side job to earn some extra money. On the first
 day, her supervisor greets her friendly and welcomes her to the job. She explains what her task is
-and suggests her that she will need to use the cluster on the campus. Lola has so far used her 
+and suggests to her that she will need to use the cluster on the campus. Lola has so far used her 
 Laptop at home for her studies, so the idea of using a super computer appears a bit intimidating to
 her. Her supervisor notices her anxiety and tells her that she will receive an introduction to the
 super computer after she has requested an account on the cluster. 
@@ -87,7 +87,7 @@ $ hostname
 {: .language-bash}
 
 ~~~ 
-{{ site.login_host }}
+{{ site.hostname }}
 ~~~
 {: .output}
 
@@ -109,6 +109,13 @@ $ nproc --all
 ~~~
 {: .language-bash}
 
+- To see more information about the CPU, Lola can run
+
+~~~
+$ lscpu
+~~~
+{: .language-bash}
+
 - every cluster node has a certain amount of memory or [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (Random-access memory). To see much memory `{{ site.login_host }}` in units of [Gigabyte](https://en.wikipedia.org/wiki/Gigabyte) has, Lola can run
 
 ~~~
@@ -125,15 +132,15 @@ $ free -g
 
 > ## Relative to your Laptop
 > 
-> Note down the number of CPU cores, the amount of RAM and the total disk space available on `{{ site.login_host }}`. Compare it to your laptop!
+> Note down the number of CPU cores, the amount of RAM and the total disk space available on `{{ site.hostname }}`. Compare it to your laptop!
 > 
-> Bonus: Divide the values obtained from `{{ site.login_host }}` by the numbers obtained for your laptop. How much more powerful is the login node of the cluster compared to your laptop?
+> Bonus: Divide the values obtained from `{{ site.hostname }}` by the numbers obtained for your laptop. How much more powerful is the login node of the cluster compared to your laptop?
 {: .challenge}
 
 
 ## Transferring Data
 
-The admin continues to explain, that typically people perform computationally heavy tasks on the cluster and prepare files that contain the results or a subset of data to create final results on the individuals laptop. So communication to and from the cluster is done mostly by transferring files. For example, Lola is asked to use a [file of her liking]({{page.root}}/filesystem/home/admin/this_weeks_canteen_menus/todays_canteen_menu.pdf) and transfer it over. For this, he advises her to use the secure copy command, `scp`. As before, this establishes a secure encrypted temporary connection between Lola's laptop and the cluster just for the sake of transferring the files. After the transfer has completed, scp will close the connection again.
+The admin continues to explain, that typically people perform computationally heavy tasks on the cluster and prepare files that contain the results or a subset of data to create final results on the individuals laptop. So communication to and from the cluster is done mostly by transferring files. For example, Lola is asked to use a [file of her liking]({{page.root}}/files/todays_canteen_menu.pdf) and transfer it over. For this, he advises her to use the secure copy command, `scp`. As before, this establishes a secure encrypted temporary connection between Lola's laptop and the cluster just for the sake of transferring the files. After the transfer has completed, scp will close the connection again.
 
 ~~~ 
 $ scp todays_canteen_menu.pdf lola@{{ site.login_host }}:todays_canteen_menu.pdf
@@ -176,7 +183,7 @@ todays_canteen_menu.pdf                                                100%   28
 
 > ## Paths Are everywhere
 > 
-> Issueing a `ssh` command always entails the same logic of path or folder description than in the regular shell. For example,
+> Issuing a `ssh` command always entails the same logic of path or folder description than in the regular shell. For example,
 > 
 > ~~~ 
 > $ scp lola@{{ site.login_host }}:todays_canteen_menu.pdf todays_canteen_menu_downloaded.pdf
@@ -292,7 +299,7 @@ As a final word on this lesson, the admin tells Lola that she should never execu
 > 
 > 2.
 > ~~~
-> $ scp {{ site.login_host }}@rob:/tmp/passwords.zip .
+> $ scp rob@{{ site.login_host }}:/tmp/passwords.zip .
 > $ unzip passwords.zip
 > ~~~
 > {: .language-bash}

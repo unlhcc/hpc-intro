@@ -23,7 +23,7 @@ straightforwards: `wget https://some/link/to/a/file.tar.gz` We've actually done 
 download our example files:
 
 ```
-[remote]$ wget https://hpc-carpentry.github.io/hpc-intro/files/bash-lesson.tar.gz
+[remote]$ wget https://grwoodw.github.io/hpc-intro/files/bash-lesson.tar.gz
 ```
 {: .bash}
 
@@ -69,6 +69,8 @@ the same way as SSH:
 
 ```
 sftp yourUsername@remote.computer.address
+
+sftp rob@{{ site.login_host }}
 ```
 {: .bash}
 
@@ -214,6 +216,43 @@ The two compression commands we'll probably want to remember are the following:
 * Compress a single file with Gzip - `gzip filename`
 * Compress a lot of files/folders with Gzip - `tar -czvf archive-name.tar.gz folder1 file2 folder3
   etc.`
+
+## Decompressing files
+
+After we have transfered the files we will want to decompress them.  the two compression commands we'll
+probably want to remember are the following:
+
+* Compress a single file with Gzip - `gunzip filename`
+* Compress a lot of files/folders with Gzip - `tar -xzvf archive-name.tar.gz
+  etc.`
+
+Decompress the bash lesson files with:
+```
+[remote]$ tar -xzvf bash-lesson.tar.gz
+```
+{: .bash}
+```
+dmel-all-r6.19.gtf
+dmel_unique_protein_isoforms_fb_2016_01.tsv
+gene_association.fb
+SRR307023_1.fastq
+SRR307023_2.fastq
+SRR307024_1.fastq
+SRR307024_2.fastq
+SRR307025_1.fastq
+SRR307025_2.fastq
+SRR307026_1.fastq
+SRR307026_2.fastq
+SRR307027_1.fastq
+SRR307027_2.fastq
+SRR307028_1.fastq
+SRR307028_2.fastq
+SRR307029_1.fastq
+SRR307029_2.fastq
+SRR307030_1.fastq
+SRR307030_2.fastq
+```
+{: .output}
 
 > ## Transferring files
 >

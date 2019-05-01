@@ -28,7 +28,21 @@ So here are a couple final words to live by:
 
 * Most clusters have a queue available for interactive use called 
   {% for queue in site.workshop_interactive_queues %}{{ queue }}, {% endfor %} etc.  
-  This is generally a better way to run small tests or compile programs.
+  This is generally a better way to run small tests or compile programs. Try `sinfo` to see what
+  queues (partitions) are available:
+
+    ```
+    [remote]$ sinfo
+    ```
+    {: .bash}
+    ```
+    m610-hpc0    up 2-00:00:00      0    n/a 
+    m710-hpc0    up 2-00:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
+    hpc0         up 2-00:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
+    General*     up    2:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
+    Gpu          up   infinite      1   idle tc-r740xd-gpu5-node875
+    ```
+    {: .output}
 
 > ## Login Node Etiquette
 > 
