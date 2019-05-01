@@ -228,7 +228,7 @@ probably want to remember are the following:
 
 Decompress the bash lesson files with:
 ```
-[remote]$ tar -xzvf bash-lesson.tar.gz
+[remote]$ tar -xvf bash-lesson.tar.gz
 ```
 {: .bash}
 ```

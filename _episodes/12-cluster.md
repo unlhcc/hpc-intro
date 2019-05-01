@@ -38,7 +38,7 @@ explains that Lola will use a small to mid-range HPC cluster.
 First of all, the admin asks Lola to connect to the super computer. The admin asks Lola to open a terminal on her laptop and type in the following commands:
 
 ~~~ 
-$ ssh lola@{{ site.login_host }}
+$ ssh -Y lola@{{ site.login_host }}
 ~~~
 {: .language-bash}
 
@@ -155,7 +155,7 @@ todays_canteen_menu.pdf                                              100%   28KB
 She can now `ssh` into the cluster again and check, if the file has arrived after she just uploaded it:
 
 ~~~ 
-$ ssh lola@{{ site.login_host }}
+$ ssh -Y lola@{{ site.login_host }}
 Last login: Tue Mar 14 14:17:44 2017 from lolas_laptop
 $ ls
 ~~~
@@ -200,19 +200,32 @@ todays_canteen_menu.pdf                                                100%   28
 
 Lola has a look in the current directory and indeed `todays_canteen_menu_downloaded.pdf`. She opens it with her pdf reader and can tell that it contains indeed the same content as the original one. The admin explains that if she would have used the same name as the destination, i.e. `todays_canteen_menu.pdf`, `scp` would have overwritten her local copy.
 
-To finish, The admin asks Lola that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `/tmp/this_weeks_canteen_menus`. She asks Lola to obtain a copy of the entire directory onto her laptop.
+To finish, The admin asks Lola that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `/fastqc/fastq`. She asks Lola to obtain a copy of the entire directory onto her laptop.
 
 ~~~ 
-$ scp -r lola@{{ site.login_host }}:/tmp/this_weeks_canteen_menus .
+$ scp -r lola@{{ site.login_host }}:/fastqc/fastq .
 ~~~
 {: .language-bash}
 
 ~~~ 
-canteen_menu_day_2.pdf                                                 100%   28KB  27.6KB/s   00:00    
-canteen_menu_day_3.pdf                                                 100%   28KB  27.6KB/s   00:00    
-canteen_menu_day_5.pdf                                                 100%   28KB  27.6KB/s   00:00    
-canteen_menu_day_4.pdf                                                 100%   28KB  27.6KB/s   00:00    
-canteen_menu_day_1.pdf                                                 100%   28KB  27.6KB/s   00:00
+SRR307027_2.fastq                                 100% 1587KB   5.9MB/s   00:00    
+SRR307023_2.fastq                                 100% 1587KB  14.9MB/s   00:00    
+SRR307026_1.fastq                                 100% 1587KB  10.7MB/s   00:00    
+processed.sh                                      100%   88     3.3KB/s   00:00    
+SRR307026_2.fastq                                 100% 1587KB  14.2MB/s   00:00    
+SRR307023_1.fastq                                 100% 1587KB  13.9MB/s   00:00    
+SRR307027_1.fastq                                 100% 1587KB  11.0MB/s   00:00    
+SRR307030_1.fastq                                 100% 1587KB  14.5MB/s   00:00    
+SRR307028_2.fastq                                 100% 1587KB  15.9MB/s   00:00    
+SRR307029_1.fastq                                 100% 1587KB  14.4MB/s   00:00    
+SRR307024_2.fastq                                 100% 1587KB  16.1MB/s   00:00    
+SRR307025_1.fastq                                 100% 1587KB  15.6MB/s   00:00    
+head_all.sh                                       100%   74     2.7KB/s   00:00    
+SRR307025_2.fastq                                 100% 1587KB  15.2MB/s   00:00    
+SRR307024_1.fastq                                 100% 1587KB  15.6MB/s   00:00    
+SRR307029_2.fastq                                 100% 1587KB  15.8MB/s   00:00    
+SRR307028_1.fastq                                 100% 1587KB  16.1MB/s   00:00    
+SRR307030_2.fastq                                 100% 1587KB  13.5MB/s   00:00 
 ~~~
 {: .output}
 
@@ -224,21 +237,25 @@ $ ls
 {: .language-bash}
 
 ~~~
-this_weeks_canteen_menus/  todays_canteen_menu_downloaded.pdf  todays_canteen_menu.pdf
+fastq/  todays_canteen_menu_downloaded.pdf  todays_canteen_menu.pdf
 ~~~
 {: .output}
 
 A closer look into that directory using the relative path with respect to the current one:
 
 ~~~ 
-$ ls this_weeks_canteen_menus/
+$ ls fastq/
 ~~~
 {: .language-bash}
 
 reveals the transferred files.
 
 ~~~ 
-canteen_menu_day_1.pdf  canteen_menu_day_2.pdf  canteen_menu_day_3.pdf  canteen_menu_day_4.pdf  canteen_menu_day_5.pdf
+head_all.sh        SRR307024_2.fastq  SRR307027_1.fastq  SRR307029_2.fastq
+processed.sh       SRR307025_1.fastq  SRR307027_2.fastq  SRR307030_1.fastq
+SRR307023_1.fastq  SRR307025_2.fastq  SRR307028_1.fastq  SRR307030_2.fastq
+SRR307023_2.fastq  SRR307026_1.fastq  SRR307028_2.fastq
+SRR307024_1.fastq  SRR307026_2.fastq  SRR307029_1.fastq
 ~~~
 {: .output}
 
@@ -258,7 +275,7 @@ As a final word on this lesson, the admin tells Lola that she should never execu
 > Lola needs to obtain a file called `results.data` from a remote machine that is called `safe-store-1`. This machine is hidden behind the login node `{{ site.login_host }}`. However she mixed up the commands somehow that are needed to get the file onto her laptop. Help her and rearrange the following commands into the right order!
 >
 > ~~~
-> $ ssh lola@`{{ site.login_host }}`
+> $ ssh -Y lola@`{{ site.login_host }}`
 > $ logout
 > $ scp lola@`{{ site.login_host }}`:results.data .
 > $ scp lola@safe-store-1:results.data .
@@ -267,7 +284,7 @@ As a final word on this lesson, the admin tells Lola that she should never execu
 >
 > > ## Solution
 > > ~~~
-> > $ ssh lola@`{{ site.login_host }}`
+> > $ ssh -Y lola@`{{ site.login_host }}`
 > > $ scp lola@safe-store-1:results.data .
 > > $ logout
 > > $ scp lola@`{{ site.login_host }}`:results.data .
@@ -292,7 +309,7 @@ As a final word on this lesson, the admin tells Lola that she should never execu
 > 
 > 1.
 > ~~~
-> $ ssh rob@{{ site.login_host }}
+> $ ssh -Y rob@{{ site.login_host }}
 > $ unzip /tmp/passwords.zip
 > ~~~
 > {: .language-bash}
