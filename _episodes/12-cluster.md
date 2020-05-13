@@ -21,33 +21,33 @@ keypoints:
 
 ## The Story
 
-Throughout this material, we will assist Lola Curious and look over her shoulder while she is 
+Throughout this material, we will assist Nelle Nemo and look over her shoulder while she is 
 starting to work at the Institute of Things as a side job to earn some extra money. On the first
 day, her supervisor greets her friendly and welcomes her to the job. She explains what her task is
-and suggests to her that she will need to use the cluster on the campus. Lola has so far used her 
+and suggests to her that she will need to use the cluster on the campus. Nelle has so far used her 
 Laptop at home for her studies, so the idea of using a super computer appears a bit intimidating to
 her. Her supervisor notices her anxiety and tells her that she will receive an introduction to the
 super computer after she has requested an account on the cluster. 
 
-Lola walks to the IT department and finishes the paper work to get an account. One of the admins 
+Nelle walks to the IT department and finishes the paper work to get an account. One of the admins 
 promises to sit down with her in the morning to show her the way around the machine. The admin 
-explains that Lola will use a small to mid-range HPC cluster.
+explains that Nelle will use a small to mid-range HPC cluster.
 
 ## Going remote
 
-First of all, the admin asks Lola to connect to the super computer. The admin asks Lola to open a terminal on her laptop and type in the following commands:
+First of all, the admin asks Nelle to connect to the super computer. The admin asks Nelle to open a terminal on her laptop and type in the following commands:
 
 ~~~ 
-$ ssh -Y lola@{{ site.login_host }}
+$ ssh -Y nelle@{{ site.login_host }}
 ~~~
 {: .language-bash}
 
 > ## Logging in
 > 
-> If you do this material on your own, be sure to replace `lola` with the username that is attributed to you on {{ site.login_host }}. When you hit enter, a prompt like this might appear:
+> If you do this material on your own, be sure to replace `nelle` with the username that is attributed to you on {{ site.login_host }}. When you hit enter, a prompt like this might appear:
 >
 > ~~~
-> lola@{{ site.login_host }}'s password:
+> nelle@{{ site.login_host }}'s password:
 > ~~~
 > {: .output}
 > 
@@ -55,12 +55,12 @@ $ ssh -Y lola@{{ site.login_host }}
 {: .callout}
 
 ~~~ 
-Last login: Fri Dec 14 14:13:14 2018 from lolas_laptop
+Last login: Fri Dec 14 14:13:14 2018 from nelles_laptop
 $ 
 ~~~
 {: .output}
 
-The admin explains to Lola that she is using a program known as the secure shell or `ssh`. This establishes a temporary encrypted connection between Lola's laptop and `{{ site.login_host }}`. The word before the `@` symbol, e.g. `lola` here, is the user account name that Lola has access permissions for on the cluster. 
+The admin explains to Nelle that she is using a program known as the secure shell or `ssh`. This establishes a temporary encrypted connection between Nelle's laptop and `{{ site.login_host }}`. The word before the `@` symbol, e.g. `nelle` here, is the user account name that Nelle has access permissions for on the cluster. 
 
 > ## Where do I get this `ssh` from ?
 > On Linux and/or macOS, the `ssh` command line utility is almost always pre-installed. Open a terminal and type `ssh --help` to check if that is the case. 
@@ -68,7 +68,7 @@ The admin explains to Lola that she is using a program known as the secure shell
 > At the time of writing, the openssh support on Microsoft is still very [recent](https://blogs.msdn.microsoft.com/powershell/2017/12/15/using-the-openssh-beta-in-windows-10-fall-creators-update-and-windows-server-1709/). Alternatives to this are [putty](http://www.putty.org), [bitvise SSH](https://www.bitvise.com/ssh-client-download), [mRemoteNG](https://mremoteng.org/) or [MobaXterm](https://mobaxterm.mobatek.net/). Download it, install it and open the GUI. The GUI asks for your user name and the destination address or IP of the computer you want to connect to. Once provided, you will be queried for your password just like in the example above.
 {: .callout}
 
-Lola is asked to use a UNIX command called `ls` (for list directory contents) to have a look around. 
+Nelle is asked to use a UNIX command called `ls` (for list directory contents) to have a look around. 
 
 ~~~ 
 $ ls
@@ -79,7 +79,7 @@ $ ls
 ~~~
 {: .output}
 
-There is nothing displayed. To prove, that Lola is really logged in to another machine, Lola issues a command that prints the name of the machine she is currently working on:
+There is nothing displayed. To prove, that Nelle is really logged in to another machine, Nelle issues a command that prints the name of the machine she is currently working on:
 
 ~~~ 
 $ hostname
@@ -91,7 +91,7 @@ $ hostname
 ~~~
 {: .output}
 
-The admin explains that Lola has to work with this remote shell session in order to run programs on the cluster. Launching programs that open a Graphical User Interface (GUI) is possible, but the interaction with the GUI will be slow as everything will have to get transferred through the WiFi network her laptop is currently logged into. Before Rob continues, he suggests to leave the cluster node again. For this, Lola can type in `logout` or `exit`.
+The admin explains that Nelle has to work with this remote shell session in order to run programs on the cluster. Launching programs that open a Graphical User Interface (GUI) is possible, but the interaction with the GUI will be slow as everything will have to get transferred through the WiFi network her laptop is currently logged into. Before Rob continues, he suggests to leave the cluster node again. For this, Nelle can type in `logout` or `exit`.
 
 ~~~ 
 $ logout
@@ -100,23 +100,23 @@ $ logout
 
 ## Looking around more
 
-The admin continues to encourage Lola to look around. She explains that all of a cluster's nodes have similar components as Lola's laptop or workstation. 
+The admin continues to encourage Nelle to look around. She explains that all of a cluster's nodes have similar components as Nelle's laptop or workstation. 
 
-- every cluster node offers a certain amount of CPU (Central Processing Unit) cores. To see how many, Lola can run
+- every cluster node offers a certain amount of CPU (Central Processing Unit) cores. To see how many, Nelle can run
 
 ~~~
 $ nproc --all
 ~~~
 {: .language-bash}
 
-- To see more information about the CPU, Lola can run
+- To see more information about the CPU, Nelle can run
 
 ~~~
 $ lscpu
 ~~~
 {: .language-bash}
 
-- every cluster node has a certain amount of memory or [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (Random-access memory). To see much memory `{{ site.login_host }}` in units of [Gigabyte](https://en.wikipedia.org/wiki/Gigabyte) has, Lola can run
+- every cluster node has a certain amount of memory or [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (Random-access memory). To see much memory `{{ site.login_host }}` in units of [Gigabyte](https://en.wikipedia.org/wiki/Gigabyte) has, Nelle can run
 
 ~~~
 $ free -g
@@ -140,10 +140,10 @@ $ free -g
 
 ## Transferring Data
 
-The admin continues to explain, that typically people perform computationally heavy tasks on the cluster and prepare files that contain the results or a subset of data to create final results on the individuals laptop. So communication to and from the cluster is done mostly by transferring files. For example, Lola is asked to use a [file of her liking]({{page.root}}/files/todays_canteen_menu.pdf) and transfer it over. For this, he advises her to use the secure copy command, `scp`. As before, this establishes a secure encrypted temporary connection between Lola's laptop and the cluster just for the sake of transferring the files. After the transfer has completed, scp will close the connection again.
+The admin continues to explain, that typically people perform computationally heavy tasks on the cluster and prepare files that contain the results or a subset of data to create final results on the individuals laptop. So communication to and from the cluster is done mostly by transferring files. For example, Nelle is asked to use a [file of her liking]({{page.root}}/files/todays_canteen_menu.pdf) and transfer it over. For this, he advises her to use the secure copy command, `scp`. As before, this establishes a secure encrypted temporary connection between Nelle's laptop and the cluster just for the sake of transferring the files. After the transfer has completed, scp will close the connection again.
 
 ~~~ 
-$ scp todays_canteen_menu.pdf lola@{{ site.login_host }}:todays_canteen_menu.pdf
+$ scp todays_canteen_menu.pdf nelle@{{ site.login_host }}:todays_canteen_menu.pdf
 ~~~
 {: .language-bash}
 
@@ -155,8 +155,8 @@ todays_canteen_menu.pdf                                              100%   28KB
 She can now `ssh` into the cluster again and check, if the file has arrived after she just uploaded it:
 
 ~~~ 
-$ ssh -Y lola@{{ site.login_host }}
-Last login: Tue Mar 14 14:17:44 2017 from lolas_laptop
+$ ssh -Y nelle@{{ site.login_host }}
+Last login: Tue Mar 14 14:17:44 2017 from nelles_laptop
 $ ls
 ~~~
 {: .language-bash}
@@ -166,14 +166,14 @@ todays_canteen_menu.pdf
 ~~~
 {: .output}
 
-Now, let's try the other way around, i.e. downloading a file from the cluster to Lola's laptop. For this, Lola has to swap the two arguments of the `scp` command she just issued.
+Now, let's try the other way around, i.e. downloading a file from the cluster to Nelle's laptop. For this, Nelle has to swap the two arguments of the `scp` command she just issued.
 
 ~~~ 
-$ scp lola@{{ site.login_host }}:todays_canteen_menu.pdf todays_canteen_menu_downloaded.pdf
+$ scp nelle@{{ site.login_host }}:todays_canteen_menu.pdf todays_canteen_menu_downloaded.pdf
 ~~~
 {: .language-bash}
 
-Lola notices how the command line changed. First, she has to enter the source (`lola@{{ site.login_host }}`) then put a `:` and continue with the path of the file she wants to download. After that, separated by a space, the destination has to be provided, which in this case is a file `todays_canteen_menu_downloaded.pdf` in the current directory.
+Nelle notices how the command line changed. First, she has to enter the source (`nelle@{{ site.login_host }}`) then put a `:` and continue with the path of the file she wants to download. After that, separated by a space, the destination has to be provided, which in this case is a file `todays_canteen_menu_downloaded.pdf` in the current directory.
 
 ~~~
 todays_canteen_menu.pdf                                                100%   28KB  27.6KB/s   00:00
@@ -186,24 +186,24 @@ todays_canteen_menu.pdf                                                100%   28
 > Issuing a `ssh` command always entails the same logic of path or folder description than in the regular shell. For example,
 > 
 > ~~~ 
-> $ scp lola@{{ site.login_host }}:todays_canteen_menu.pdf todays_canteen_menu_downloaded.pdf
+> $ scp nelle@{{ site.login_host }}:todays_canteen_menu.pdf todays_canteen_menu_downloaded.pdf
 > ~~~
 > {: .language-bash}
 > 
-> yields two relative paths. For the remote source `lola@{{ site.login_host }}:todays_canteen_menu.pdf`, the file name mentioned after the colon, is a relative path to the home directory. For brevity, this information is not shown. The same is true for the destination on the local machine `todays_canteen_menu_downloaded.pdf`. This is a relative path to the folder Lola currently works in. The same command as above expressed with absolute paths, could look like this (if Lola currently works inside `/home/lola/work`):
+> yields two relative paths. For the remote source `nelle@{{ site.login_host }}:todays_canteen_menu.pdf`, the file name mentioned after the colon, is a relative path to the home directory. For brevity, this information is not shown. The same is true for the destination on the local machine `todays_canteen_menu_downloaded.pdf`. This is a relative path to the folder Nelle currently works in. The same command as above expressed with absolute paths, could look like this (if Nelle currently works inside `/home/nelle/work`):
 >
 > ~~~ 
-> $ scp lola@{{ site.login_host }}:/home/lola/todays_canteen_menu.pdf /home/lola/work/todays_canteen_menu_downloaded.pdf
+> $ scp nelle@{{ site.login_host }}:/home/nelle/todays_canteen_menu.pdf /home/nelle/work/todays_canteen_menu_downloaded.pdf
 > ~~~
 > {: .language-bash}
 {: .callout}
 
-Lola has a look in the current directory and indeed `todays_canteen_menu_downloaded.pdf`. She opens it with her pdf reader and can tell that it contains indeed the same content as the original one. The admin explains that if she would have used the same name as the destination, i.e. `todays_canteen_menu.pdf`, `scp` would have overwritten her local copy.
+Nelle has a look in the current directory and indeed `todays_canteen_menu_downloaded.pdf`. She opens it with her pdf reader and can tell that it contains indeed the same content as the original one. The admin explains that if she would have used the same name as the destination, i.e. `todays_canteen_menu.pdf`, `scp` would have overwritten her local copy.
 
-To finish, The admin asks Lola that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `/fastqc/fastq`. She asks Lola to obtain a copy of the entire directory onto her laptop.
+To finish, The admin asks Nelle that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `/fastqc/fastq`. She asks Nelle to obtain a copy of the entire directory onto her laptop.
 
 ~~~ 
-$ scp -r lola@{{ site.login_host }}:/fastqc/fastq .
+$ scp -r nelle@{{ site.login_host }}:/fastqc/fastq .
 ~~~
 {: .language-bash}
 
@@ -229,7 +229,7 @@ SRR307030_2.fastq                                 100% 1587KB  13.5MB/s   00:00
 ~~~
 {: .output}
 
-The trailing `.` is a short-hand to represent the current working directory that Lola currently calls `scp` from. When inspecting this directory, Lola sees the transferred directory:
+The trailing `.` is a short-hand to represent the current working directory that Nelle currently calls `scp` from. When inspecting this directory, Nelle sees the transferred directory:
 
 ~~~ 
 $ ls
@@ -259,7 +259,7 @@ SRR307024_1.fastq  SRR307026_2.fastq  SRR307029_1.fastq
 ~~~
 {: .output}
 
-Rob suggests to Lola to consult the man page of `scp` for further details by calling:
+Rob suggests to Nelle to consult the man page of `scp` for further details by calling:
 
 ~~~ 
 $ man scp
@@ -268,26 +268,26 @@ $ man scp
 
 ## Using the login node is not using the cluster
 
-As a final word on this lesson, the admin tells Lola that she should never execute long running processes or applications on `{{ site.login_host }}`. This is a server that is used by many users of `{{ site.cluster_name }}`. If Lola starts a lot of long running processes, other users may start seeing their commands taking longer to complete. To actually to do science and complete the tasks Lola is meant to complete, a software called __the scheduler__ has to be used. 
+As a final word on this lesson, the admin tells Nelle that she should never execute long running processes or applications on `{{ site.login_host }}`. This is a server that is used by many users of `{{ site.cluster_name }}`. If Nelle starts a lot of long running processes, other users may start seeing their commands taking longer to complete. To actually to do science and complete the tasks Nelle is meant to complete, a software called __the scheduler__ has to be used. 
 
 > ## All mixed up
 >
-> Lola needs to obtain a file called `results.data` from a remote machine that is called `safe-store-1`. This machine is hidden behind the login node `{{ site.login_host }}`. However she mixed up the commands somehow that are needed to get the file onto her laptop. Help her and rearrange the following commands into the right order!
+> Nelle needs to obtain a file called `results.data` from a remote machine that is called `safe-store-1`. This machine is hidden behind the login node `{{ site.login_host }}`. However she mixed up the commands somehow that are needed to get the file onto her laptop. Help her and rearrange the following commands into the right order!
 >
 > ~~~
-> $ ssh -Y lola@`{{ site.login_host }}`
+> $ ssh -Y nelle@`{{ site.login_host }}`
 > $ logout
-> $ scp lola@`{{ site.login_host }}`:results.data .
-> $ scp lola@safe-store-1:results.data .
+> $ scp nelle@`{{ site.login_host }}`:results.data .
+> $ scp nelle@safe-store-1:results.data .
 > ~~~
 > {: .language-bash}
 >
 > > ## Solution
 > > ~~~
-> > $ ssh -Y lola@`{{ site.login_host }}`
-> > $ scp lola@safe-store-1:results.data .
+> > $ ssh -Y nelle@`{{ site.login_host }}`
+> > $ scp nelle@safe-store-1:results.data .
 > > $ logout
-> > $ scp lola@`{{ site.login_host }}`:results.data .
+> > $ scp nelle@`{{ site.login_host }}`:results.data .
 > > ~~~
 > > {: .language-bash}
 > {: .solution}
