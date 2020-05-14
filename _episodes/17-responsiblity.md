@@ -36,11 +36,11 @@ So here are a couple final words to live by:
     ```
     {: .bash}
     ```
-    m610-hpc0    up 2-00:00:00      0    n/a 
-    m710-hpc0    up 2-00:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
-    hpc0         up 2-00:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
-    General*     up    2:00:00     12   idle tc-m710-hpc0-node[625-628,630-637]
-    Gpu          up   infinite      1   idle tc-r740xd-gpu5-node875
+    batch*          up 7-00:00:00    246    mix c[0120,0122...1316]
+    devel           up 7-00:00:00      4   idle c[1723-1726]
+    guest_gpu       up 7-00:00:00      4  alloc c[0610,0612,0614,0616]
+    guest_gpu       up 7-00:00:00      4   idle c[2619,2621,2623,2625]
+    ....
     ```
     {: .output}
 
@@ -84,5 +84,16 @@ So here are a couple final words to live by:
 
 * Always use the default compilers if possible. Newer compilers are great, but older stuff 
   generally has less compatibility issues.
+
+## What to do if you're stuck
+ * [Read the Documentation](hcc.unl.edu/docs)
+   * If the documentation doesn’t answer your question,let us know!
+ * Use `man` or `--help`
+ * Consult Google
+ * Contact Us
+   * Drop in our offices
+     * UNL: Schorr Center –Room 118
+     * UNO: Peter Kiewit Institute –Room 152
+   * Email [hcc-support@unl.edu](mailto:hcc-support@unl.edu)
 
 {% include links.md %}
