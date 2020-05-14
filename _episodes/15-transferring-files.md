@@ -23,7 +23,7 @@ straightforwards: `wget https://some/link/to/a/file.tar.gz` We've actually done 
 download our example files:
 
 ```
-[remote]$ wget https://grwoodw.github.io/hpc-intro/files/bash-lesson.tar.gz
+[remote]$ wget https://unlhcc.github.io/hpc-intro/files/bash-lesson.tar.gz
 ```
 {: .bash}
 
