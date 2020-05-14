@@ -311,31 +311,10 @@ an analysis or we are attempting to debug something that went wrong with a previ
 Fortunately, SLURM makes it easy to start an interactive job with `srun`:
 
 ```
-[remote]$ srun --x11 --pty bash
+[remote]$ srun --pty bash
 ```
 {: .bash}
 
-> ## Note for administrators
-> 
-> The `--x11` option will not work unless the Slurm version is greater than or equal to 17.11 and the
-> [slurm-spank-x11](https://github.com/hautreux/slurm-spank-x11) plugin is installed. You should
-> also make sure `xeyes` is installed as an example X11 app (`xorg-x11-apps` package on CentOS). If
-> you do not have these installed, just have students use `srun --pty bash` instead.
-{: .callout}
-
-You should be presented with a bash prompt. Note that the prompt will likely change to reflect your
-new location, in this case the worker node we are logged on. You can also verify this with
-`hostname`.
-
-> ## Creating remote graphics
-> 
-> To demonstrate what happens when you create a graphics window on the remote node, use the `xeyes`
-> command. A relatively adorable pair of eyes should pop up (press `Ctrl-c` to stop).
->
-> Note that this command requires you to have connected with X-forwarding enabled (`ssh -X
-> username@host.address.ca`). If you are using a Mac, you must have installed XQuartz (and restarted
-> your computer) for this to work.
-{: .challenge}
 
 When you are done with the interactive job, type `exit` to quit your session.
 
