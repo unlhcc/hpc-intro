@@ -51,9 +51,21 @@ $ ssh -Y nelle@{{ site.login_host }}
 > ~~~
 > {: .output}
 > 
-> Now is your chance to type in your password. But watch out, the characters you type are not displayed on the screen.
+> Now is your chance to type in your password. But watch out, the characters you type are not displayed on the screen.You will then be prompted to use DUO two factor authentication
 {: .callout}
-
+> ~~~
+> Duo two-factor login for nelle
+>
+>Enter a passcode or select one of the following options:
+>
+> 1. Duo Push to XXX-XXX-5555
+> 2. Phone call to XXX-XXX-5555
+> 3. SMS passcodes to XXX-XXX-5555 (next code starts with: 1)
+>
+>Passcode or option (1-3):
+{: .output}
+> Now is your chance to enter your choice for DUO two factor. This will send a push notification, phone call, or SMS message to your phone, or you can use a YubiKey here.
+{: .callout}
 ~~~ 
 Last login: Fri Dec 14 14:13:14 2018 from nelles_laptop
 $ 
@@ -63,7 +75,7 @@ $
 The admin explains to Nelle that she is using a program known as the secure shell or `ssh`. This establishes a temporary encrypted connection between Nelle's laptop and `{{ site.login_host }}`. The word before the `@` symbol, e.g. `nelle` here, is the user account name that Nelle has access permissions for on the cluster. 
 
 > ## Where do I get this `ssh` from ?
-> On Linux and/or macOS, the `ssh` command line utility is almost always pre-installed. Open a terminal and type `ssh --help` to check if that is the case. 
+> On Linux, Windows 10, and/or macOS, the `ssh` command line utility is almost always pre-installed. Open a terminal and type `ssh --help` to check if that is the case. 
 > 
 > At the time of writing, the openssh support on Microsoft is still very [recent](https://blogs.msdn.microsoft.com/powershell/2017/12/15/using-the-openssh-beta-in-windows-10-fall-creators-update-and-windows-server-1709/). Alternatives to this are [putty](http://www.putty.org), [bitvise SSH](https://www.bitvise.com/ssh-client-download), [mRemoteNG](https://mremoteng.org/) or [MobaXterm](https://mobaxterm.mobatek.net/). Download it, install it and open the GUI. The GUI asks for your user name and the destination address or IP of the computer you want to connect to. Once provided, you will be queried for your password just like in the example above.
 {: .callout}
@@ -116,7 +128,7 @@ $ lscpu
 ~~~
 {: .language-bash}
 
-- every cluster node has a certain amount of memory or [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (Random-access memory). To see much memory `{{ site.login_host }}` in units of [Gigabyte](https://en.wikipedia.org/wiki/Gigabyte) has, Nelle can run
+- every cluster node has a certain amount of memory or [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (Random-access memory). To see much memory `{{ site.hostname }}` in units of [Gigabyte](https://en.wikipedia.org/wiki/Gigabyte) has, Nelle can run
 
 ~~~
 $ free -g
@@ -193,17 +205,17 @@ todays_canteen_menu.pdf                                                100%   28
 > yields two relative paths. For the remote source `nelle@{{ site.login_host }}:todays_canteen_menu.pdf`, the file name mentioned after the colon, is a relative path to the home directory. For brevity, this information is not shown. The same is true for the destination on the local machine `todays_canteen_menu_downloaded.pdf`. This is a relative path to the folder Nelle currently works in. The same command as above expressed with absolute paths, could look like this (if Nelle currently works inside `/home/nelle/work`):
 >
 > ~~~ 
-> $ scp nelle@{{ site.login_host }}:/home/nelle/todays_canteen_menu.pdf /home/nelle/work/todays_canteen_menu_downloaded.pdf
+> $ scp nelle@{{ site.login_host }}:/home/npgyre/nelle/todays_canteen_menu.pdf /home/nelle/work/todays_canteen_menu_downloaded.pdf
 > ~~~
 > {: .language-bash}
 {: .callout}
 
 Nelle has a look in the current directory and indeed `todays_canteen_menu_downloaded.pdf`. She opens it with her pdf reader and can tell that it contains indeed the same content as the original one. The admin explains that if she would have used the same name as the destination, i.e. `todays_canteen_menu.pdf`, `scp` would have overwritten her local copy.
 
-To finish, The admin asks Nelle that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `/fastqc/fastq`. She asks Nelle to obtain a copy of the entire directory onto her laptop.
+To finish, The admin asks Nelle that she can also transfer entire directories. She prepared a temporary directory on the cluster for her under `$HOME` directory, `/home/npgyre/nelle/fastq`. She asks Nelle to obtain a copy of the entire directory onto her laptop.
 
 ~~~ 
-$ scp -r nelle@{{ site.login_host }}:/fastqc/fastq .
+$ scp -r nelle@{{ site.login_host }}:/home/npgyre/nelle/fastq .
 ~~~
 {: .language-bash}
 
