@@ -44,24 +44,20 @@ To see available software modules, use `module avail`
 ```
 {: .bash}
 ```
------------------------------ MPI-dependent avx2 modules -------------------------------
-abinit/8.2.2     (chem)      lammps/20170331                    plumed/2.3.0        (chem)
-abyss/1.9.0      (bio)       mrbayes/3.2.6            (bio)     pnetcdf/1.8.1       (io)
-boost-mpi/1.60.0 (t)         ncl/6.4.0                          quantumespresso/6.0 (chem)
-cdo/1.7.2        (geo)       ncview/2.1.7             (vis)     ray/2.3.1           (bio)
-
-[removed most of the output here for clarity]
-
-   t:        Tools for development / Outils de développement
-   vis:      Visualisation software / Logiciels de visualisation
-   chem:     Chemistry libraries/apps / Logiciels de chimie
-   geo:      Geography libraries/apps / Logiciels de géographie
-   phys:     Physics libraries/apps / Logiciels de physique
-   Aliases:  Aliases exist: foo/1.2.3 (1.2) means that "module load foo/1.2" will load foo/1.2.3
-   D:        Default Module
-
-Use "module spider" to find all possible modules.
-Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+---------------------------------------------------------- Core Modules ----------------------------------------------------------
+   abacas/1.3                           gmap/2018.03.25                 (D)    pygenometracks/2.0
+   abaqus/6.14.2                 (D)    gmcloser/1.6                           pymagic/0.1
+   abaqus/2019                          gnu-parallel/20180522                  pymeteo/0.5
+   abayesqr/1.0                         gnuplot/4.6                            pymongo/3.0
+   abricate/0.8                         gnuplot/5.2                     (D)    pymongo/3.3
+   abricate/1.0                  (D)    gradle/3.3                             pymongo/3.7                    (D)
+   adfr-suite/1.0                       gradle/5.6                      (D)    pyseer/1.2
+   afni/18.2                            gramalign/3.0                          pyseer/1.3                     (D)
+   afq/a42e157                          gramcluster/1.3                        python-openstackclient/2.1
+   afq/c59f21b                   (D)    gramdist/1.0                           python/2.7
+   afterqc/0.9                          graphlan/1.0                           python/3.3
+   agfusion/1.0                         graphlan/1.1                    (D)    python/3.4
+.....
 ```
 {: .output}
 
@@ -80,7 +76,7 @@ so we can use it to tell us where a particular piece of software is stored.
 ```
 {: .bash}
 ```
-/usr/bin/which: no fastqc in (/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/dell/srvadmin/bin:/home/yourUsername/.local/bin:/home/yourUsername/bin)
+/usr/bin/which: no fastqc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/util/opt/bin:/opt/puppetlabs/bin:/home/yourGroupname/yourUsername/bin)
 ```
 {: .output}
 
@@ -92,7 +88,7 @@ We can load the `fastqc` command with `module load`:
 ```
 {: .bash}
 ```
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/fastqc-0.11.5-dtjwde43z7ktbhq7pwc5btlzqf4ksuta/bin/fastqc
+/util/opt/anaconda/deployed-conda-envs/packages/fastqc/envs/fastqc-0.11.7/bin/fastqc
 ```
 {: .output}
 
@@ -109,19 +105,7 @@ variables we can print it out using `echo`.
 ```
 {: .bash}
 ```
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/fastqc-0.11.5-dtjwde43z7ktbhq7pwc5btlzqf4ksuta/bin:
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/perl-5.24.1-wgrwtsrr3rvn54b4i56raxnop2xynubk/bin:
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/gdbm-1.13-ssxfxqt5e4vnxgogdpbiwymgmybk4iwd/bin:
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/readline-7.0-elgoxoqsat4xt56tgfp2obo4odhohhdk/bin:
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/ncurses-6.0-zxqghp37j45pyopzyqzpjmi4xqvn33le/bin:
-/cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/jdk-8u141-b15-y6l4xaepdukhuxn3vxb7mo26pqmcb6ln/bin:
-/usr/local/bin:
-/usr/bin:
-/usr/local/sbin:
-/usr/sbin:
-/opt/dell/srvadmin/bin:
-/home/yourUsername/.local/bin:
-/home/yourUsername/bin
+/util/opt/anaconda/deployed-conda-envs/packages/fastqc/envs/fastqc-0.11.7/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/util/opt/bin:/opt/puppetlabs/bin:/home/yourGroupname/yourUsername/bin
 ```
 {: .output}
 
@@ -130,11 +114,13 @@ the beginning. When we ran `module load fastqc`, it added this directory to the 
 our `$PATH`. Let's examine what's there:
 
 ```
-[remote]$ ls /cluster/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/fastqc-0.11.5-dtjwde43z7ktbhq7pwc5btlzqf4ksuta/bin
+[remote]$ ls /util/opt/anaconda/deployed-conda-envs/packages/fastqc/envs/fastqc-0.11.7/bin
 ```
 {: .bash}
 ```
-fastqc
+activate    djpeg     fc-conflist      genbrk    giffix      instmodsh  jcmd       jjs         jshell         libpng16-config  lzegrep   makeconv    perlthanks    pod2text    ptardiff     shasum     tiffcrop    transicc   wrjpgcom     xzdec       zstd
+aserver     enc2xs    fc-list          gencfu    giftext     jaotc      jconsole   jlink       json_pp        linkicc          lzfgrep   pack200     piconv        pod2usage   ptargrep     splain     tiffdither  unlz4      xml2-config  xzdiff      zstdcat
+.....
 ```
 {: .output}
 
@@ -232,10 +218,7 @@ Now, using the instructions in the README.md file, all we need to do to complete
 {: .bash}
 ```
 gcc -g -Wall -O2 -Wno-unused-function seqtk.c -o seqtk -lz -lm
-seqtk.c: In function ‘stk_comp’:
-seqtk.c:399:16: warning: variable ‘lc’ set but not used [-Wunused-but-set-variable]
-    int la, lb, lc, na, nb, nc, cnt[11];
-                ^
+   
 ```
 {: .output}
 
@@ -247,25 +230,23 @@ It's done! Now all we need to do to use the program is invoke it like any other 
 {: .bash}
 ```
 Usage:   seqtk <command> <arguments>
-Version: 1.2-r101-dirty
+Version: 1.3-r114-dirty
 
 Command: seq       common transformation of FASTA/Q
          comp      get the nucleotide composition of FASTA/Q
          sample    subsample sequences
-         subseq    extract subsequences from FASTA/Q
          fqchk     fastq QC (base/quality summary)
          mergepe   interleave two PE FASTA/Q files
          trimfq    trim FASTQ using the Phred algorithm
 
          hety      regional heterozygosity
          gc        identify high- or low-GC regions
-         mutfa     point mutate FASTA at specified positions
          mergefa   merge two FASTA/Q files
          famask    apply a X-coded FASTA to a source FASTA
          dropse    drop unpaired from interleaved PE FASTA/Q
          rename    rename sequence names
-         randbase  choose a random base from hets
          cutN      cut sequence at long N
+         gap       get the gap locations
          listhet   extract the position of each het
 ```
 {: .output}

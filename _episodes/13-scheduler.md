@@ -82,8 +82,8 @@ the *queue*. To check on our job's status, we check the queue using the command 
 ```
 {: .bash}
 ```
-JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         TIME TIME_LEFT NODES CPUS
-36856 yourUsername yourAccount example-job.sh R  None   2017-07-01T16:47:02 0:11 59:49     1     1
+JOBID PARTITION     NAME  USER       ST      TIME  NODES NODELIST(REASON)
+36855     batch example-  yourUsername  R       0:02      1 c0218
 ```
 {: .output}
 
@@ -137,8 +137,8 @@ sleep 120
 ```
 {: .bash}
 ```
-JOBID USER         ACCOUNT     NAME     ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
-38191 yourUsername yourAccount new_name PD Priority N/A        0:00 1:00:00   1     1
+JOBID PARTITION     NAME  USER       ST      TIME  NODES NODELIST(REASON)
+36880     batch new_name  yourUsername  R       0:02      1 c0218
 ```
 {: .output}
 
@@ -196,7 +196,7 @@ minutes.
 
 ```
 #!/bin/bash
-#SBATCH -t 0:0:30
+#SBATCH -t 00:01:00
 
 echo 'This script is running on:'
 hostname
@@ -212,9 +212,9 @@ Submit the job and wait for it to finish. Once it is has finished, check the log
 ```
 {: .bash}
 ```
-This job is running on:
-gra533
-slurmstepd: error: *** JOB 38193 ON gra533 CANCELLED AT 2017-07-02T16:35:48 DUE TO TIME LIMIT ***
+This script is running on:
+c0218.crane.hcc.unl.edu
+slurmstepd: error: *** JOB 38193 ON c0218 CANCELLED AT 2020-05-14T15:53:18 DUE TO TIME LIMIT ***
 ```
 {: .output}
 
@@ -240,8 +240,8 @@ command. Let's submit a job and then cancel it using its job number.
 ```
 Submitted batch job 38759
 
-JOBID USER         ACCOUNT     NAME           ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
-38759 yourUsername yourAccount example-job.sh PD Priority N/A        0:00 1:00      1     1
+JOBID PARTITION     NAME  USER       ST      TIME  NODES NODELIST(REASON)
+38759     batch new_name  yourUsername  R       0:02      1 c0218
 ```
 {: .output}
 
@@ -254,7 +254,7 @@ successfully cancelled.
 ```
 {: .bash}
 ```
-JOBID  USER  ACCOUNT  NAME  ST  REASON  START_TIME  TIME  TIME_LEFT  NODES  CPUS
+JOBID PARTITION     NAME  USER       ST      TIME  NODES NODELIST(REASON)
 ```
 {: .output}
 
@@ -285,7 +285,7 @@ tasks as a one-off with `srun`.
 ```
 {: .bash}
 ```
-tc-m710-hpc0-node625
+c0218.crane.hcc.unl.edu
 ```
 {: .output}
 
@@ -311,31 +311,10 @@ an analysis or we are attempting to debug something that went wrong with a previ
 Fortunately, SLURM makes it easy to start an interactive job with `srun`:
 
 ```
-[remote]$ srun --x11 --pty bash
+[remote]$ srun --pty bash
 ```
 {: .bash}
 
-> ## Note for administrators
-> 
-> The `--x11` option will not work unless the Slurm version is greater than or equal to 17.11 and the
-> [slurm-spank-x11](https://github.com/hautreux/slurm-spank-x11) plugin is installed. You should
-> also make sure `xeyes` is installed as an example X11 app (`xorg-x11-apps` package on CentOS). If
-> you do not have these installed, just have students use `srun --pty bash` instead.
-{: .callout}
-
-You should be presented with a bash prompt. Note that the prompt will likely change to reflect your
-new location, in this case the worker node we are logged on. You can also verify this with
-`hostname`.
-
-> ## Creating remote graphics
-> 
-> To demonstrate what happens when you create a graphics window on the remote node, use the `xeyes`
-> command. A relatively adorable pair of eyes should pop up (press `Ctrl-c` to stop).
->
-> Note that this command requires you to have connected with X-forwarding enabled (`ssh -X
-> username@host.address.ca`). If you are using a Mac, you must have installed XQuartz (and restarted
-> your computer) for this to work.
-{: .challenge}
 
 When you are done with the interactive job, type `exit` to quit your session.
 
