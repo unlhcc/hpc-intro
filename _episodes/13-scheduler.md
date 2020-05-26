@@ -197,12 +197,12 @@ about how to make sure that you're using resources effectively in a later episod
 
 Resource requests are typically binding. If you exceed them, your job will be killed. Let's use
 walltime as an example. We will request 1 minute of walltime, and attempt to run a job for two
-minutes. To add time to the existing script, we will add `sleep 120` to add 2 minutes the the time needed to complete the job and `#SBATCH --time = 00:01:00` to set the 1 minute time limit.
+minutes. To add time to the existing script, we will add `sleep 120` to add 2 minutes the the time needed to complete the job and `#SBATCH --time 00:01:00` to set the 1 minute time limit.
 
 >```
 > #!/bin/bash
-> #SBATCH --job-name = new_name
-> #SBATCH --time = 00:01:00
+> #SBATCH --job-name new_name
+> #SBATCH --time 00:01:00
 >
 > for datafile in NENE*[AB].txt
 > do
