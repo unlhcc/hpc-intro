@@ -47,15 +47,16 @@ run as a test.
 
 > ## Creating our test job
 > 
-> Using your favourite text editor, create the following script and run it. Does it run on the
-> cluster or just our login node?
+> Using Nelle's script from earlier, we will run the script as a job on the cluster.
 >
 >```
 >#!/bin/bash
 >
-> echo 'This script is running on:'
-> hostname
-> sleep 120
+> for datafile in NENE*[AB].txt
+> do
+>    echo $datafile
+>    bash goostats $datafile stats-$datafile
+> done
 > ```
 > {: .bash}
 {: .challenge}
@@ -65,7 +66,7 @@ distinction between running the job through the scheduler and just "running it".
 to the scheduler, we use the `sbatch` command.
 
 ```
-[remote]$ sbatch example-job.sh
+[remote]$ sbatch do-stats.sh
 ```
 {: .bash}
 ```
@@ -82,8 +83,8 @@ the *queue*. To check on our job's status, we check the queue using the command 
 ```
 {: .bash}
 ```
-JOBID PARTITION     NAME  USER       ST      TIME  NODES NODELIST(REASON)
-36855     batch example-  yourUsername  R       0:02      1 c0218
+JOBID PARTITION        NAME  USER       ST      TIME  NODES NODELIST(REASON)
+36855     batch do-stats.sh  yourUsername  R       0:02      1 c0218
 ```
 {: .output}
 
@@ -96,7 +97,7 @@ administrator. You can change the interval to a more resonable value, for exampl
 `-n 60` parameter. Let's try using it to monitor another job.
 
 ```
-[remote]$ sbatch example-job.sh
+[remote]$ sbatch do-stats.sh
 [remote]$ watch -n 60 squeue -u yourUsername
 ```
 {: .bash}
@@ -118,19 +119,23 @@ scheduler-specific options. Though these comments differ from scheduler to sched
 special comment is `#SBATCH`. Anything following the `#SBATCH` comment is interpreted as an
 instruction to the scheduler.
 
-Let's illustrate this by example. By default, a job's name is the name of the script, but the `-J`
+Let's illustrate this by example. By default, a job's name is the name of the script, but the `--job-name`
 option can be used to change the name of a job.
 
-Submit the following job (`sbatch example-job.sh`):
+Add the line `#SBATCH --job-name new_name` in the job submit script:
 
-```
-#!/bin/bash
-#SBATCH -J new_name
 
-echo 'This script is running on:'
-hostname
-sleep 120
-```
+>```
+> #!/bin/bash
+> #SBATCH --job-name new_name
+>
+> for datafile in NENE*[AB].txt
+> do
+>    echo $datafile
+>    bash goostats $datafile stats-$datafile
+> done
+> ```
+
 
 ```
 [remote]$ squeue -u yourUsername
@@ -191,24 +196,28 @@ about how to make sure that you're using resources effectively in a later episod
 {: .challenge}
 
 Resource requests are typically binding. If you exceed them, your job will be killed. Let's use
-walltime as an example. We will request 30 seconds of walltime, and attempt to run a job for two
-minutes.
+walltime as an example. We will request 1 minute of walltime, and attempt to run a job for two
+minutes. To add time to the existing script, we will add `sleep 120` to add 2 minutes the the time needed to complete the job and `#SBATCH --time 00:01:00` to set the 1 minute time limit.
 
-```
-#!/bin/bash
-#SBATCH -t 00:01:00
-
-echo 'This script is running on:'
-hostname
-sleep 120
-```
+>```
+> #!/bin/bash
+> #SBATCH --job-name new_name
+> #SBATCH --time 00:01:00
+>
+> for datafile in NENE*[AB].txt
+> do
+>    echo $datafile
+>    bash goostats $datafile stats-$datafile
+> done
+> sleep 120
+> ```
 
 Submit the job and wait for it to finish. Once it is has finished, check the log file.
-
+Replace `<jobid>`  with the job id listed from submitting the job.
 ```
-[remote]$ sbatch example-job.sh
+[remote]$ sbatch do-stats.sh
 [remote]$ watch -n 60 squeue -u yourUsername
-[remote]$ cat slurm-38193.out
+[remote]$ cat slurm-<jobid>.out
 ```
 {: .bash}
 ```
@@ -233,7 +242,7 @@ Sometimes we'll make a mistake and need to cancel a job. This can be done with t
 command. Let's submit a job and then cancel it using its job number.
 
 ```
-[remote]$ sbatch example-job.sh
+[remote]$ sbatch do-stats.sh
 [remote]$ squeue -u yourUsername
 ```
 {: .bash}
